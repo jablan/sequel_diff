@@ -1,0 +1,46 @@
+
+:javascript
+  $(function() {
+    $('#left, #right').change(function() {
+      $('#columns').load('/columns/' + $('#left').val() + '/' + $('#right').val() + window.location.search);
+    });
+    $('#left').change();
+  });
+
+%h2 Pick tables to compare
+
+%form#form
+  .sec
+    -['left', 'right'].each do |side|
+      .sec_vert
+        %h3
+          ="#{side.capitalize} table"
+        %select{:id => side, :name => side}
+          -@tables.each do |table|
+            -if table == instance_variable_get("@table_#{side}")
+              %option{:selected => 'selected'}
+                =table
+            -else
+              %option
+                =table
+
+  .sec
+    %h3 Columns:
+    %div{:id => "columns"}
+  .sec
+    %h3 Optional conditions:
+    %textarea{:name => 'conditions', :cols => 80, :rows => 3}
+      -if @conditions && @conditions.is_a?(String)
+        =@conditions
+  .sec
+    %h3 Options:
+    %input{:type => 'checkbox', :name => 'hide_same', :checked=> params['hide_same']} Hide same values
+
+  %br
+
+  .sec
+    %input{:type => 'submit', :value => 'Diff'}
+
+  -if @left && @right
+    .sec#content
+      =haml :contents, :layout => false

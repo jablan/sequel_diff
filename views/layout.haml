@@ -1,0 +1,54 @@
+!!!
+%html
+  %head
+    %title
+      SqlDiff
+      =@title
+    %style
+      :sass
+        html
+          font-family: Lucida Grande, Lucida Sans, Helvetica, sans-serif
+        h3
+          margin-bottom: 0.3em
+        table, th, td
+          font-family: Liberation Mono, Monaco, monospace
+          font-size: 85%
+          text-align: center
+          border: solid 1px black
+          border-collapse: collapse
+        ul
+          margin: 0
+          padding: 0 20px
+        li
+          list-style-type: none
+        a
+          color: black
+        .sec
+          padding: 3px 0
+          clear: both
+        .sec_vert
+          float: left
+        #toc
+          background-color: #EEEEEE
+          display: block
+          opacity: 0.75
+          position: fixed
+          right: 30px
+          top: 30px
+          padding: 10px
+          border: dotted 3px #AAAAAA
+          border-radius: 10px
+          -moz-border-radius: 10px
+        .table_same
+          background-color: #99FF99
+        .table_diff
+          background-color: #FF99FF
+        .table_left
+          background-color: #99FFFF
+        .table_right
+          background-color: #FFFF99
+    %script{:type => 'text/javascript', :src => 'js/jquery.js'}
+%body
+  %h1
+    SequelDiff
+  = yield

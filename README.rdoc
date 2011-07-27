@@ -1,0 +1,40 @@
+= sequel_diff, database comparison web-based tool
+
+== Overview
+
+sequel_diff allows you to compare contents of two database tables (or two sets of
+data from within the same table) or views, and see which rows differ, with some
+aggregation capability as well (declare some columns as "key" and other as "values").
+
+== Configuring
+
+You should specify your database "connection url" editing the file itself. (One of
+TODOs are to move this elsewhere.)
+
+== Installation and starting
+
+sequel_diff is sinatra-based app, so you will need sinatra installed, together with
++haml+ gem, which is used as template language:
+
+  gem install sinatra haml
+
+You can then start the application from command line, doing:
+
+  ruby sequel_diff.rb
+
+or as any other Rack-enabled web application.
+
+== Usage
+
+* Choose left and right table
+* Chose which fields will be part of the key, which fields will be values and which should be ignored
+* Optionally add constraints (+WHERE+ part of +SELECT+ statement) into the text area
+* Run the Diff
+
+== ToDo
+
+* Move configuration elsewhere
+* Enable comparing tables from different databases
+* Enable separate constraints for left and right table
+* Improve documentation
+

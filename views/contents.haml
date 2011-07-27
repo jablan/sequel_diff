@@ -1,0 +1,104 @@
+#toc
+  %ul
+    %li
+      %a{:href => '#h_common'} Common keys
+    %li
+      %ul
+        %li
+          %a{:href => '#h_same', :class => 'table_same'} Same values
+        %li
+          %a{:href => '#h_diff', :class => 'table_diff'} Different values
+    %li
+      %a{:href => '#h_left', :class => 'table_left'}
+        = "Keys in left (#{@table_left}) only"
+    %li
+      %a{:href => '#h_right', :class => 'table_right'}
+        = "Keys in right (#{@table_right}) only"
+
+%h2#h_common Common keys:
+
+%h3#h_same Same values:
+- unless params.has_key?('hide_same')
+  %table{:class => "table_same"}
+    %tr
+      -@key_cols.each do |c|
+        %th
+          =c
+      -@val_cols.each do |c|
+        %th
+          =c
+    -@same_values.each do |key|
+      %tr
+        -key.each do |v|
+          %td
+            =v
+        -@left[key].each do |v|
+          %td
+            = v
+- else
+  = "#{@same_values.size} records hidden"
+  
+
+
+%h3#h_diff Different values:
+%table{:class => "table_diff"}
+  %tr
+    -@key_cols.each do |c|
+      %th
+        =c
+    -@val_cols.each do |c|
+      %th
+        ="left:#{c}"
+      %th
+        ="right:#{c}"
+
+  -@diff_values.each do |key|
+    %tr
+      -key.each do |v|
+        %td
+          =v
+      -@val_cols.each_with_index do |c, i|
+        %td
+          =@left[key][i]
+        %td
+          =@right[key][i]
+
+%h2#h_left
+  = "Keys in left (#{@table_left}) only:"
+
+%table{:class => "table_left"}
+  %tr
+    -@key_cols.each do |c|
+      %th
+        =c
+    -@val_cols.each do |c|
+      %th
+        =c
+  -@in_left_only.each do |key|
+    %tr
+      -key.each do |v|
+        %td
+          =v
+      -@val_cols.each_with_index do |c, i|
+        %td
+          =@left[key][i]
+
+%h2#h_right
+  = "Keys in right (#{@table_right}) only:"
+
+%table{:class => "table_right"}
+  %tr
+    -@key_cols.each do |c|
+      %th
+        =c
+    -@val_cols.each do |c|
+      %th
+        =c
+  -@in_right_only.each do |key|
+    %tr
+      -key.each do |v|
+        %td
+          =v
+      -@val_cols.each_with_index do |c, i|
+        %td
+          =@right[key][i]

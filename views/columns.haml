@@ -1,0 +1,32 @@
+%table
+  %tr
+    %th Left
+    %th Key
+    %th Value
+    %th Ignore
+    %th Right
+  -@common.each do |col|
+    %tr
+      %td
+        =col
+      -['key', 'value', 'ignore'].each do |type|
+        %td
+          %input{:type => 'radio', :name => "col_type[#{col}]", :value => type, :checked => @col_type[col] == type}
+      %td
+        =col
+  -@left.each do |col|
+    %tr
+      %td
+        =col
+      -['key', 'value', 'ignore'].each do |type|
+        %td
+          %input{:type => 'radio', :name => "col_type[#{col}]", :value => type, :disabled => true}
+      %td
+  -@right.each do |col|
+    %tr
+      %td
+      -['key', 'value', 'ignore'].each do |type|
+        %td
+          %input{:type => 'radio', :name => "col_type[#{col}]", :value => type, :disabled => true}
+      %td
+        =col
